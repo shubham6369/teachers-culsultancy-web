@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teacher Dashboard | TeachConnect</title>
+    <meta name="description"
+        content="Manage your teacher profile, browse vacancies, apply for jobs, and track your applications on TeachConnect.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Outfit:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="dashboard.css">
+</head>
+
+<body>
+    <div class="dashboard-wrapper">
+
+        <!-- ═══════════════════════════════════════════════ -->
+        <!-- MOBILE TOGGLE                                  -->
+        <!-- ═══════════════════════════════════════════════ -->
+        <button class="mobile-toggle" id="mobile-toggle" onclick="toggleSidebar()">
+            <i class="fas fa-bars"></i>
+        </button>
+
+        <!-- ═══════════════════════════════════════════════ -->
+        <!-- SIDEBAR                                        -->
+        <!-- ═══════════════════════════════════════════════ -->
+        <aside class="sidebar" id="sidebar">
+            <a href="index.html" class="sidebar-logo">
+                <div class="logo-icon"><i class="fas fa-chalkboard-teacher"></i></div>
+                <span class="logo-text">Teach<span class="logo-accent">Connect</span></span>
+            </a>
+
+            <div class="sidebar-section-label">Main Menu</div>
+            <ul class="sidebar-nav">
+                <li><a href="#" class="active" data-page="dashboard" onclick="showPage('dashboard')"><i
+                            class="fas fa-th-large"></i> Dashboard</a></li>
+                <li><a href="#" data-page="vacancies" onclick="showPage('vacancies')"><i class="fas fa-briefcase"></i>
+                        Browse Vacancies</a></li>
+                <li><a href="#" data-page="applications" onclick="showPage('applications')"><i
+                            class="fas fa-file-alt"></i> My Applications</a></li>
+                <li><a href="#" data-page="profile" onclick="showPage('profile')"><i class="fas fa-user"></i> My
+                        Profile</a></li>
+            </ul>
+
+            <div class="sidebar-section-label">Account</div>
+            <ul class="sidebar-nav">
+                <li><a href="#" onclick="openNotifications()"><i class="fas fa-bell"></i> Notifications <span
+                            class="notif-count-sidebar" id="notif-count-sidebar"></span></a></li>
+                <li><button onclick="handleLogout()"><i class="fas fa-sign-out-alt"></i> Logout</button></li>
+            </ul>
+
+            <div class="sidebar-user">
+                <div class="user-avatar" id="sidebar-avatar">T</div>
+                <div class="user-info">
+                    <div class="user-name" id="sidebar-name">Teacher</div>
+                    <div class="user-role">Teacher Account</div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- ═══════════════════════════════════════════════ -->
+        <!-- MAIN CONTENT                                   -->
+        <!-- ═══════════════════════════════════════════════ -->
+        <main class="main-content">
+
+            <!-- ─── DASHBOARD PAGE ────────────────────────── -->
+            <div class="page-content active" id="page-dashboard">
+                <div class="page-header">
+                    <div>
+                        <h1>Welcome back, <span class="gradient-text" id="welcome-name">Teacher</span> 👋</h1>
+                        <p>Here's your teaching career overview</p>
+                    </div>
+                    <div class="header-actions">
+                        <div class="notification-bell" onclick="openNotifications()">
+                            <button class="btn btn-icon btn-ghost"><i class="fas fa-bell"></i></button>
+                            <span class="badge-count" id="notif-badge">0</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Profile Completion Alert -->
+                <div id="profile-completion-alert">
+                    <!-- Dynamic content -->
+                </div>
+
+                <!-- Stats -->
+                <div class="stat-cards animate-slide-up">
+                    <div class="stat-card blue">
+                        <div class="stat-icon"><i class="fas fa-briefcase"></i></div>
+                        <div class="stat-value" id="stat-available">0</div>
+                        <div class="stat-label">Available Vacancies</div>
+                    </div>
+                    <div class="stat-card emerald">
+                        <div class="stat-icon"><i class="fas fa-paper-plane"></i></div>
+                        <div class="stat-value" id="stat-applied">0</div>
+                        <div class="stat-label">Applications Sent</div>
+                    </div>
+                    <div class="stat-card amber">
+                        <div class="stat-icon"><i class="fas fa-hourglass-half"></i></div>
+                        <div class="stat-value" id="stat-pending">0</div>
+                        <div class="stat-label">Pending Review</div>
+                    </div>
+                    <div class="stat-card violet">
+                        <div class="stat-icon"><i class="fas fa-check-circle"></i></div>
+                        <div class="stat-value" id="stat-selected">0</div>
+                        <div class="stat-label">Selected</div>
+                    </div>
+                </div>
+
+                <!-- Recent Vacancies -->
+                <div class="content-card animate-scale" style="animation-delay: 0.1s;">
+                    <div class="card-header">
+                        <h3><i class="fas fa-fire"></i> Latest Vacancies</h3>
+                        <button class="btn btn-ghost btn-sm" onclick="showPage('vacancies')">View All <i
+                                class="fas fa-arrow-right"></i></button>
+                    </div>
+                    <div class="card-body">
+                        <div class="vacancy-grid" id="dashboard-vacancies">
+                            <div class="empty-state">
+                                <div class="empty-icon"><i class="fas fa-briefcase"></i></div>
+                                <h3>No Vacancies Yet</h3>
+                                <p>New job postings from schools will appear here. Stay tuned!</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recent Applications -->
+                <div class="content-card animate-scale" style="animation-delay: 0.2s;">
+                    <div class="card-header">
+                        <h3><i class="fas fa-clock"></i> Recent Applications</h3>
+                        <button class="btn btn-ghost btn-sm" onclick="showPage('applications')">View All <i
+                                class="fas fa-arrow-right"></i></button>
+                    </div>
+                    <div class="card-body">
+                        <div id="dashboard-applications">
+                            <div class="empty-state">
+                                <div class="empty-icon"><i class="fas fa-file-alt"></i></div>
+                                <h3>No Applications Yet</h3>
+                                <p>Browse vacancies and apply to start your journey.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ─── VACANCIES PAGE ────────────────────────── -->
+            <div class="page-content" id="page-vacancies">
+                <div class="page-header">
+                    <div>
+                        <h1>Browse <span class="gradient-text">Vacancies</span></h1>
+                        <p>Find your perfect teaching position</p>
+                    </div>
+                    <div class="header-actions">
+                        <div class="notification-bell" onclick="openNotifications()">
+                            <button class="btn btn-icon btn-ghost"><i class="fas fa-bell"></i></button>
+                            <span class="badge-count" id="notif-badge-2">0</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Filters -->
+                <div class="filter-bar">
+                    <div class="search-input">
+                        <i class="fas fa-search"></i>
+                        <input type="text" id="vacancy-search"
+                            placeholder="Search vacancies by title, school, or subject..." oninput="filterVacancies()">
+                    </div>
+                    <select id="vacancy-subject-filter" onchange="filterVacancies()">
+                        <option value="">All Subjects</option>
+                        <option>Mathematics</option>
+                        <option>Physics</option>
+                        <option>Chemistry</option>
+                        <option>Biology</option>
+                        <option>English</option>
+                        <option>Hindi</option>
+                        <option>Social Science</option>
+                        <option>Computer Science</option>
+                        <option>Sanskrit</option>
+                        <option>Physical Education</option>
+                        <option>Art & Craft</option>
+                        <option>Music</option>
+                    </select>
+                    <select id="vacancy-location-filter" onchange="filterVacancies()">
+                        <option value="">All Locations</option>
+                        <option>Delhi</option>
+                        <option>Mumbai</option>
+                        <option>Bangalore</option>
+                        <option>Chennai</option>
+                        <option>Kolkata</option>
+                        <option>Hyderabad</option>
+                        <option>Pune</option>
+                        <option>Noida</option>
+                        <option>Lucknow</option>
+                        <option>Jaipur</option>
+                    </select>
+                </div>
+
+                <!-- Vacancy List -->
+                <div class="vacancy-grid" id="all-vacancies">
+                    <div class="empty-state">
+                        <div class="empty-icon"><i class="fas fa-search"></i></div>
+                        <h3>No Vacancies Found</h3>
+                        <p>Schools haven't posted any vacancies yet. Check back soon!</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ─── APPLICATIONS PAGE ─────────────────────── -->
+            <div class="page-content" id="page-applications">
+                <div class="page-header">
+                    <div>
+                        <h1>My <span class="gradient-text">Applications</span></h1>
+                        <p>Track all your job applications</p>
+                    </div>
+                </div>
+
+                <!-- Tabs -->
+                <div class="tabs">
+                    <button class="tab-btn active" onclick="filterApplications('all', this)">All</button>
+                    <button class="tab-btn" onclick="filterApplications('pending', this)">Pending</button>
+                    <button class="tab-btn" onclick="filterApplications('selected', this)">Selected</button>
+                    <button class="tab-btn" onclick="filterApplications('rejected', this)">Rejected</button>
+                </div>
+
+                <div class="applicant-list" id="my-applications">
+                    <div class="empty-state">
+                        <div class="empty-icon"><i class="fas fa-file-alt"></i></div>
+                        <h3>No Applications Yet</h3>
+                        <p>Start applying to vacancies to see your applications here.</p>
+                        <button class="btn btn-primary" onclick="showPage('vacancies')"><i class="fas fa-search"></i>
+                            Browse Vacancies</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ─── PROFILE PAGE ──────────────────────────── -->
+            <div class="page-content" id="page-profile">
+                <div class="page-header">
+                    <div>
+                        <h1>My <span class="gradient-text">Profile</span></h1>
+                        <p>Manage your teacher profile — this is what schools see</p>
+                    </div>
+                </div>
+
+                <div style="display: grid; grid-template-columns: 1fr 2fr; gap: 24px;">
+                    <!-- Profile Card -->
+                    <div>
+                        <div class="teacher-profile-card">
+                            <div class="profile-avatar" id="profile-avatar">T</div>
+                            <h3 id="profile-name">Teacher Name</h3>
+                            <div class="profile-subject" id="profile-subject">Subject</div>
+                            <div class="profile-location" id="profile-location"><i class="fas fa-map-marker-alt"></i>
+                                Location</div>
+                            <div class="profile-stats-row">
+                                <div class="profile-stat">
+                                    <div class="stat-num" id="profile-applied-count">0</div>
+                                    <div class="stat-lbl">Applied</div>
+                                </div>
+                                <div class="profile-stat">
+                                    <div class="stat-num" id="profile-selected-count">0</div>
+                                    <div class="stat-lbl">Selected</div>
+                                </div>
+                                <div class="profile-stat">
+                                    <div class="stat-num" id="profile-exp">0</div>
+                                    <div class="stat-lbl">Yrs Exp</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Edit Profile Form -->
+                    <div class="content-card">
+                        <div class="card-header">
+                            <h3><i class="fas fa-edit"></i> Edit Profile</h3>
+                        </div>
+                        <div class="card-body">
+                            <form id="profile-form" onsubmit="saveTeacherProfile(event)">
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label for="edit-name">Full Name *</label>
+                                        <input type="text" id="edit-name" placeholder="Your full name" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="edit-email">Email *</label>
+                                        <input type="email" id="edit-email" placeholder="your@email.com" required>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label for="edit-phone">Phone Number *</label>
+                                        <input type="tel" id="edit-phone" placeholder="+91 XXXXX XXXXX" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="edit-subject">Primary Subject *</label>
+                                        <select id="edit-subject" required>
+                                            <option value="">Select Subject</option>
+                                            <option>Mathematics</option>
+                                            <option>Physics</option>
+                                            <option>Chemistry</option>
+                                            <option>Biology</option>
+                                            <option>English</option>
+                                            <option>Hindi</option>
+                                            <option>Social Science</option>
+                                            <option>Computer Science</option>
+                                            <option>Sanskrit</option>
+                                            <option>Physical Education</option>
+                                            <option>Art & Craft</option>
+                                            <option>Music</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label for="edit-experience">Experience (Years)</label>
+                                        <input type="number" id="edit-experience" placeholder="e.g. 5" min="0" max="50">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="edit-qualification">Highest Qualification</label>
+                                        <select id="edit-qualification">
+                                            <option value="">Select Qualification</option>
+                                            <option>B.Ed</option>
+                                            <option>M.Ed</option>
+                                            <option>B.A</option>
+                                            <option>M.A</option>
+                                            <option>B.Sc</option>
+                                            <option>M.Sc</option>
+                                            <option>B.Tech</option>
+                                            <option>M.Tech</option>
+                                            <option>PhD</option>
+                                            <option>Other</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label for="edit-city">City / District</label>
+                                        <input type="text" id="edit-city" placeholder="e.g. New Delhi">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="edit-state">State</label>
+                                        <select id="edit-state">
+                                            <option value="">Select State</option>
+                                            <option>Andhra Pradesh</option>
+                                            <option>Bihar</option>
+                                            <option>Delhi</option>
+                                            <option>Gujarat</option>
+                                            <option>Jharkhand</option>
+                                            <option>Karnataka</option>
+                                            <option>Kerala</option>
+                                            <option>Madhya Pradesh</option>
+                                            <option>Maharashtra</option>
+                                            <option>Rajasthan</option>
+                                            <option>Tamil Nadu</option>
+                                            <option>Telangana</option>
+                                            <option>Uttar Pradesh</option>
+                                            <option>West Bengal</option>
+                                            <option>Other</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="edit-skills">Additional Skills (comma-separated)</label>
+                                    <input type="text" id="edit-skills"
+                                        placeholder="e.g. Classroom Management, Curriculum Design, EdTech">
+                                </div>
+                                <div class="form-group">
+                                    <label for="edit-about">About Me / Bio</label>
+                                    <textarea id="edit-about" rows="4"
+                                        placeholder="Write a brief introduction about yourself, your teaching philosophy, achievements..."></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label for="edit-current-school">Current / Last School</label>
+                                    <input type="text" id="edit-current-school" placeholder="e.g. Delhi Public School">
+                                </div>
+                                <button type="submit" class="btn btn-primary btn-lg"><i class="fas fa-save"></i> Save
+                                    Profile</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </main>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════ -->
+    <!-- NOTIFICATION PANEL                             -->
+    <!-- ═══════════════════════════════════════════════ -->
+    <div class="notification-overlay" id="notif-overlay" onclick="closeNotifications()"></div>
+    <div class="notification-panel" id="notif-panel">
+        <div class="panel-header">
+            <h3><i class="fas fa-bell"></i> Notifications</h3>
+            <button class="panel-close" onclick="closeNotifications()"><i class="fas fa-times"></i></button>
+        </div>
+        <div class="notification-list" id="notification-list">
+            <div class="empty-state" style="padding: 40px 20px;">
+                <div class="empty-icon"><i class="fas fa-bell-slash"></i></div>
+                <h3>No Notifications</h3>
+                <p>You'll be notified when new vacancies match your profile.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════ -->
+    <!-- APPLY MODAL                                    -->
+    <!-- ═══════════════════════════════════════════════ -->
+    <div class="modal-overlay" id="applyModal">
+        <div class="modal modal-lg">
+            <button class="modal-close" onclick="closeModal('applyModal')"><i class="fas fa-times"></i></button>
+            <div class="modal-header">
+                <div class="modal-icon"><i class="fas fa-paper-plane"></i></div>
+                <h2>Apply for Vacancy</h2>
+                <p id="apply-vacancy-title">Position Title</p>
+            </div>
+            <form id="apply-form" onsubmit="submitApplication(event)">
+                <input type="hidden" id="apply-vacancy-id">
+                <div class="form-group">
+                    <label for="apply-cover">Cover Letter / Message to School</label>
+                    <textarea id="apply-cover" rows="5"
+                        placeholder="Write a brief message to the school about why you're a great fit for this role..."
+                        required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="apply-available">Availability / Joining Date</label>
+                    <input type="text" id="apply-available"
+                        placeholder="e.g. Immediately, 1 month notice, From April 2026">
+                </div>
+                <div class="form-group">
+                    <label for="apply-salary">Expected Salary (₹/month)</label>
+                    <input type="text" id="apply-salary" placeholder="e.g. 25,000 - 35,000">
+                </div>
+                <button type="submit" class="btn btn-primary btn-full btn-lg"><i class="fas fa-paper-plane"></i> Submit
+                    Application</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════ -->
+    <!-- ID CARD MODAL                                  -->
+    <!-- ═══════════════════════════════════════════════ -->
+    <div class="modal-overlay" id="idCardModal">
+        <div class="modal">
+            <button class="modal-close" onclick="closeModal('idCardModal')"><i class="fas fa-times"></i></button>
+            <div class="modal-header">
+                <div class="modal-icon"><i class="fas fa-id-card"></i></div>
+                <h2>Your Teacher ID Card</h2>
+                <p>Digital identification for TeachConnect</p>
+            </div>
+
+            <div id="id-card-wrap">
+                <!-- ID Card Content (Filled dynamically) -->
+            </div>
+
+            <div style="margin-top: 24px; display: flex; gap: 12px;">
+                <button class="btn btn-primary btn-full" onclick="window.print()"><i class="fas fa-print"></i> Print ID
+                    Card</button>
+                <button class="btn btn-ghost btn-full" onclick="closeModal('idCardModal')">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast -->
+    <div class="toast" id="toast">
+        <div class="toast-icon"><i class="fas fa-check-circle"></i></div>
+        <div class="toast-content">
+            <strong id="toast-title">Success!</strong>
+            <span id="toast-message">Action completed.</span>
+        </div>
+        <button class="toast-close" onclick="hideToast()"><i class="fas fa-times"></i></button>
+    </div>
+
+    <script src="app.js"></script>
+    <script>
+        // Initialize Teacher Dashboard
+        document.addEventListener('DOMContentLoaded', () => {
+            const user = TeachConnect.getCurrentUser();
+            if (!user || user.role !== 'teacher') {
+                window.location.href = 'index.html';
+                return;
+            }
+            initTeacherDashboard();
+        });
+    </script>
+</body>
+
+</html>
