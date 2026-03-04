@@ -3,41 +3,36 @@
 /* ═══════════════════════════════════════════════ */
 :root {
     --primary: #2563eb;
-    /* Strong Blue */
     --primary-light: #60a5fa;
     --primary-dark: #1e40af;
     --accent: #0f172a;
-    /* Slate for depth */
     --accent-light: #334155;
     --emerald: #059669;
     --coral: #e11d48;
     --violet: #7c3aed;
     --teal: #0d9488;
     --bg-dark: #ffffff;
-    /* White background */
-    --bg-card: #ffffff;
-    --bg-card-hover: #f8fafc;
+    --bg-card: #f8fafc;
+    /* Darker than background */
+    --bg-card-hover: #f1f5f9;
     --bg-surface: #f1f5f9;
-    /* Subtle Blue-Gray Surface */
     --text-primary: #1e3a8a;
-    /* Blue text */
     --text-secondary: #2563eb;
-    /* Blue text */
     --text-muted: #64748b;
     --border: rgba(30, 58, 138, 0.1);
-    --glass: rgba(255, 255, 255, 0.9);
+    --glass: rgba(248, 250, 252, 0.95);
     --glass-border: rgba(30, 58, 138, 0.1);
-    --shadow-sm: 0 2px 8px rgba(30, 58, 138, 0.05);
-    --shadow-md: 0 10px 25px rgba(30, 58, 138, 0.08);
-    --shadow-lg: 0 20px 50px rgba(30, 58, 138, 0.12);
-    --shadow-glow: 0 0 40px rgba(37, 99, 235, 0.1);
+    --shadow-sm: 0 4px 6px -1px rgba(30, 58, 138, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+    --shadow-md: 0 12px 24px -6px rgba(30, 58, 138, 0.1), 0 4px 12px -2px rgba(0, 0, 0, 0.05);
+    --shadow-lg: 0 20px 40px -12px rgba(30, 58, 138, 0.15), 0 8px 16px -4px rgba(0, 0, 0, 0.08);
+    --shadow-3d: 0 10px 30px rgba(30, 58, 138, 0.15), 0 2px 5px rgba(0, 0, 0, 0.1), inset 0 1px 1px rgba(255, 255, 255, 1);
     --radius-sm: 8px;
     --radius-md: 12px;
     --radius-lg: 20px;
     --radius-xl: 32px;
     --font-primary: 'Inter', sans-serif;
     --font-display: 'Outfit', sans-serif;
-    --transition: 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 *,
@@ -1048,12 +1043,13 @@ ul {
     border-radius: var(--radius-lg);
     padding: 36px;
     transition: var(--transition);
+    box-shadow: var(--shadow-sm);
 }
 
 .about-card:hover {
-    transform: translateY(-4px);
-    border-color: var(--primary);
-    box-shadow: var(--shadow-glow);
+    transform: translateY(-8px) scale(1.02);
+    border-color: var(--primary-light);
+    box-shadow: var(--shadow-lg);
 }
 
 .about-card-icon {
@@ -1147,12 +1143,13 @@ ul {
     transition: var(--transition);
     position: relative;
     overflow: hidden;
+    box-shadow: var(--shadow-md);
 }
 
 .feature-card:hover {
-    transform: translateY(-4px);
-    border-color: rgba(37, 99, 235, 0.1);
-    box-shadow: var(--shadow-glow);
+    transform: translateY(-10px) rotateX(2deg) rotateY(2deg);
+    border-color: var(--primary-light);
+    box-shadow: var(--shadow-lg), 0 10px 10px -10px rgba(0, 0, 0, 0.1);
 }
 
 .feature-icon-wrap {
