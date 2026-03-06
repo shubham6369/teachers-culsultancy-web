@@ -19,6 +19,6 @@ const db = getFirestore(app);
 const auth = getAuth(app);
 
 // Initialize Analytics (Safe for SSR)
-const analytics = typeof window !== 'undefined' ? isSupported().then(yes => yes ? getAnalytics(app) : null) : null;
+const analytics = typeof window !== 'undefined' ? isSupported().then((yes: boolean) => yes ? getAnalytics(app) : null) : null;
 
 export { app, db, auth, analytics };
