@@ -1,7 +1,6 @@
 import { adminDb } from './firebase-admin';
 import { FieldValue } from 'firebase-admin/firestore';
 import { revalidatePath, revalidateTag } from 'next/cache';
-import { addCertificateJob } from './queue';
 
 /**
  * Handle individual teacher verification
@@ -97,26 +96,31 @@ export async function awardPointsAction(teacherId: string, points: number, reaso
 
 /**
  * Trigger background certificate generation
+ * No longer needs BullMQ/Redis Jobs.
+ * Handled by Fireabase Functions triggered by 'global_certificate_logs'
  */
 export async function requestCertificateAction(teacherId: string, teacherName: string, type: string) {
-    // 1. Add to BullMQ for background processing
-    await addCertificateJob({ teacherId, teacherName, type });
+    const batch = adminDb.batch();
 
-    // 2. Log request in Teacher's private folder
-    await adminDb.collection('users').doc(teacherId).collection('certificate_requests').add({
+    // 1. Log request in Teacher's private folder
+    const teacherReqRef = adminDb.collection('users').doc(teacherId).collection('certificate_requests').doc();
+    batch.set(teacherReqRef, {
         type,
         status: 'QUEUED',
         requestedAt: FieldValue.serverTimestamp(),
     });
 
-    // 3. Log to Global Index (for Admin Dashboard View)
-    await adminDb.collection('global_certificate_logs').add({
+    // 2. Log to Global Index (for Admin Dashboard View & Cloud Function Trigger)
+    const globalLogRef = adminDb.collection('global_certificate_logs').doc();
+    batch.set(globalLogRef, {
         teacherId,
         teacherName,
         type,
         status: 'QUEUED',
         requestedAt: FieldValue.serverTimestamp(),
     });
+
+    await batch.commit();
 
     return { success: true, message: 'Certificate generation queued in background.' };
 }
