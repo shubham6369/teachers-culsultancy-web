@@ -1,0 +1,12 @@
+node_modules/
+.next/
+out/
+build/
+.vercel/
+dist/
+.env*
+*.local
+firebase-debug.log
+firestore-debug.log
+.firebaserc
+package-lock.json
