@@ -25,8 +25,9 @@ export async function generateStaticParams() {
 /**
  * SEO Settings — Unique for every teacher
  */
-export async function generateMetadata({ params }: { params: { id: string } }): Promise<Metadata> {
-    const teacher = await getTeacherData(params.id);
+export async function generateMetadata({ params }: { params: Promise<{ id: string }> }): Promise<Metadata> {
+    const { id } = await params;
+    const teacher = await getTeacherData(id);
     if (!teacher) return { title: 'Teacher Not Found' };
 
     return {
@@ -45,8 +46,9 @@ async function getTeacherData(id: string) {
     return { id: doc.id, ...doc.data() } as any;
 }
 
-export default async function TeacherProfilePage({ params }: { params: { id: string } }) {
-    const teacher = await getTeacherData(params.id);
+export default async function TeacherProfilePage({ params }: { params: Promise<{ id: string }> }) {
+    const { id } = await params;
+    const teacher = await getTeacherData(id);
 
     if (!teacher) {
         notFound();
