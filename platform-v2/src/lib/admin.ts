@@ -48,7 +48,7 @@ export async function verifyTeacherAction(teacherId: string, status: 'VERIFIED' 
     try {
         revalidatePath('/public', 'page');
         revalidatePath(`/teachers/${teacherId}`, 'page');
-        revalidateTag('public-data');
+        revalidateTag('public-data', 'max');
     } catch (e) {
         console.error("Revalidation failed:", e);
     }

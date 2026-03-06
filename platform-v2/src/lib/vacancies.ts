@@ -43,7 +43,7 @@ export async function postVacancyAction(schoolId: string, vacancyData: any) {
         revalidatePath('/vacancies');
 
         // Purge any caches tagged with 'vacancies'
-        revalidateTag('vacancies-list');
+        revalidateTag('vacancies-list', 'max');
 
         console.log(`[REVALIDATE] Vacancy ${vacancyId} is now live and purged from all caches.`);
     } catch (e) {
@@ -81,7 +81,7 @@ export async function closeVacancyAction(vacancyId: string) {
     try {
         revalidatePath('/public');
         revalidatePath('/vacancies');
-        revalidateTag('vacancies-list');
+        revalidateTag('vacancies-list', 'max');
     } catch (e) {
         console.error("Closure revalidation failed.", e);
     }

@@ -19,7 +19,7 @@ async function getPendingTeachers(pageSize = 25, lastDoc = null) {
 
     const snap = await getDocs(q);
     return {
-        data: snap.docs.map(d => ({ id: d.id, ...d.data() })),
+        data: snap.docs.map((d: any) => ({ id: d.id, ...d.data() })),
         lastVisible: snap.docs[snap.docs.length - 1],
         hasMore: snap.docs.length === pageSize
     };
@@ -36,12 +36,12 @@ export default function VerificationQueue() {
         isFetchingNextPage,
     } = useInfiniteQuery({
         queryKey: ["pending-teachers"],
-        queryFn: ({ pageParam }) => getPendingTeachers(PAGE_SIZE, pageParam),
+        queryFn: ({ pageParam }: { pageParam: any }) => getPendingTeachers(PAGE_SIZE, pageParam),
         initialPageParam: null as any,
-        getNextPageParam: (lastPage) => lastPage.hasMore ? lastPage.lastVisible : undefined,
+        getNextPageParam: (lastPage: any) => lastPage.hasMore ? lastPage.lastVisible : undefined,
     });
 
-    const allRows = data ? data.pages.flatMap((d) => d.data) : [];
+    const allRows = data ? data.pages.flatMap((d: any) => d.data) : [];
 
     const rowVirtualizer = useVirtualizer({
         count: hasNextPage ? allRows.length + 1 : allRows.length,
@@ -80,7 +80,7 @@ export default function VerificationQueue() {
     return (
         <div ref={parentRef} className="h-[600px] overflow-auto border rounded-2xl bg-white shadow-xl">
             <div style={{ height: `${rowVirtualizer.getTotalSize()}px`, width: "100%", position: "relative" }}>
-                {rowVirtualizer.getVirtualItems().map((virtualRow) => {
+                {rowVirtualizer.getVirtualItems().map((virtualRow: any) => {
                     const isLoaderRow = virtualRow.index > allRows.length - 1;
                     const teacher: any = allRows[virtualRow.index];
 

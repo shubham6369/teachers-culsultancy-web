@@ -22,7 +22,7 @@ export async function POST(req: NextRequest) {
     try {
         // Revalidation is handled with specialized 'page' scope for maximum precision
         if (tag) {
-            revalidateTag(tag);
+            revalidateTag(tag, 'max');
             console.log(`[REVALIDATE] Tag purged: ${tag}`);
         }
 
