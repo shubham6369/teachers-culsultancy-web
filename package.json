@@ -1,0 +1,7 @@
+{
+    "name": "guruwale-root",
+    "private": true,
+    "workspaces": [
+        "platform-v2"
+    ]
+}

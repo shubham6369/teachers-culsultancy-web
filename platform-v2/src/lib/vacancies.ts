@@ -7,6 +7,7 @@ import { revalidatePath, revalidateTag } from 'next/cache';
  * Triggers instant revalidation for 1 Lakh+ teachers.
  */
 export async function postVacancyAction(schoolId: string, vacancyData: any) {
+    if (!adminDb) throw new Error('Firebase Admin DB not initialized');
     const vacancyId = `vac_${Date.now()}_${Math.random().toString(36).slice(2, 7)}`;
     const vacancyRef = adminDb.collection('vacancies').doc(vacancyId);
 

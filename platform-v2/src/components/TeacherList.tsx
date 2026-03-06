@@ -70,7 +70,7 @@ export default function TeacherList() {
             >
                 {rowVirtualizer.getVirtualItems().map((virtualRow) => {
                     const isLoaderRow = virtualRow.index > allRows.length - 1;
-                    const teacher = allRows[virtualRow.index];
+                    const teacher = allRows[virtualRow.index] as any;
 
                     return (
                         <div

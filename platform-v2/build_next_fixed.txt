@@ -1,0 +1,19 @@
+Γû▓ Next.js 16.1.6 (Turbopack)
+
+ΓÜá The "middleware" file convention is deprecated. Please use "proxy" instead. Learn more: https://nextjs.org/docs/messages/middleware-to-proxy
+  Creating an optimized production build ...
+Γ£ô Compiled successfully in 10.5s
+  Running TypeScript ...
+Failed to compile.
+
+./src/app/api/admin/verify/route.ts:14:36
+Type error: 'adminAuth' is possibly 'null'.
+
+  12 |
+  13 |         const idToken = authHeader.split('Bearer ')[1];
+> 14 |         const decodedToken = await adminAuth.verifyIdToken(idToken);
+     |                                    ^
+  15 |
+  16 |         if (decodedToken.role !== 'ADMIN') {
+  17 |             return NextResponse.json({ error: 'Access denied' }, { status: 403 });
+Next.js build worker exited with code: 1 and signal: null

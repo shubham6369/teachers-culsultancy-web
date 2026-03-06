@@ -17,7 +17,7 @@ async function getVacancies() {
 
 async function getStats() {
     const snap = await adminDb.collection('counters').doc('stats').get();
-    return snap.data();
+    return (snap.exists ? snap.data() : {}) as any;
 }
 
 export default async function PublicPage() {
