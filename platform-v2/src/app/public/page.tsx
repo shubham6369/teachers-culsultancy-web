@@ -40,7 +40,7 @@ export default async function PublicPage() {
                 {/* HERO SECTION (ISR Data) */}
                 <section className="text-center space-y-6">
                     <h1 className="text-6xl font-black text-slate-900 tracking-tight leading-tight">
-                        Empowering India's <br /> <span className="text-blue-600">Teacher Leaders</span>
+                        Empowering India&apos;s <br /> <span className="text-blue-600">Teacher Leaders</span>
                     </h1>
                     <p className="max-w-2xl mx-auto text-xl text-slate-500 leading-relaxed">
                         Join a community of <span className="text-slate-900 font-bold">{(stats?.total || 100000).toLocaleString()}</span> teachers and access elite professional opportunities.
