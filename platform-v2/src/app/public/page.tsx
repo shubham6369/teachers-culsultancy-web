@@ -11,7 +11,8 @@ async function getVacancies() {
         .limit(10)
         .get();
 
-    return snap.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+    return snap.docs.map((doc: any) => ({ id: doc.id, ...doc.data() }));
+
 }
 
 async function getStats() {
@@ -42,7 +43,7 @@ export default async function PublicPage() {
                         Empowering India's <br /> <span className="text-blue-600">Teacher Leaders</span>
                     </h1>
                     <p className="max-w-2xl mx-auto text-xl text-slate-500 leading-relaxed">
-                        Join a community of <span className="text-slate-900 font-bold">{(stats?.total || 100000).toLocaleString()}</span> teachers and access elite mentorship opportunities.
+                        Join a community of <span className="text-slate-900 font-bold">{(stats?.total || 100000).toLocaleString()}</span> teachers and access elite professional opportunities.
                     </p>
                 </section>
 
@@ -50,7 +51,7 @@ export default async function PublicPage() {
                 <section className="grid grid-cols-2 md:grid-cols-4 gap-4">
                     {[
                         { label: 'Total Teachers', value: stats?.total, color: 'blue' },
-                        { label: 'Verified Mentors', value: stats?.verified, color: 'emerald' },
+                        { label: 'Verified Experts', value: stats?.verified, color: 'emerald' },
                         { label: 'Open Vacancies', value: vacancies.length + 420, color: 'amber' }, // Mocking some growth
                         { label: 'Active States', value: 28, color: 'violet' }
                     ].map((s, i) => (

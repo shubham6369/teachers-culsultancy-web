@@ -11,17 +11,5 @@ module.exports = {
                 PORT: 3000,
             },
         },
-        {
-            name: "teachconnect-worker",
-            script: "npx",
-            args: "ts-node scripts/worker.ts", // Runs the BullMQ worker
-            instances: 1, // 1 worker instance is usually enough to handle queues
-            autorestart: true, // Restarts automatically if it crashes
-            watch: false,
-            max_memory_restart: "1G", // Prevents memory leaks
-            env: {
-                NODE_ENV: "production",
-            },
-        },
     ],
 };
