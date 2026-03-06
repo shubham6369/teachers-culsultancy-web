@@ -1,0 +1,63 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    
+    // Helper function to check if the user is an admin
+    // Assumes custom claim { "role": "admin" } or { "admin": true }
+    function isAdmin() {
+      return request.auth != null && (
+        request.auth.token.role == 'admin' || 
+        request.auth.token.admin == true
+      );
+    }
+
+    // --- Teachers & Professional Profiles ---
+    match /users/{userId} {
+      // 1. Anyone can view VERIFIED profiles (Public Directory)
+      // 2. Owners can view their own profile
+      // 3. Admins can view any profile (PENDING, REJECTED, etc.)
+      allow read: if 
+        resource.data.verification == 'VERIFIED' || 
+        (request.auth != null && request.auth.uid == userId) || 
+        isAdmin();
+
+      // 1. Authenticated users can create their own profile as 'PENDING'
+      // 2. Admins can create any profile
+      allow create: if 
+        (request.auth != null && request.auth.uid == userId && request.resource.data.verification == 'PENDING') || 
+        isAdmin();
+
+      // 1. Owners can update their own data, but NOT their verification status
+      // 2. Admins can update anything (used for Approving/Rejecting)
+      allow update: if 
+        (request.auth != null && request.auth.uid == userId && request.resource.data.verification == resource.data.verification) || 
+        isAdmin();
+
+      // Owners can delete their own profile (maybe?)
+      allow delete: if (request.auth != null && request.auth.uid == userId) || isAdmin();
+    }
+
+    // --- Vacancies (ISR / Public List) ---
+    match /vacancies/{vacancyId} {
+      // Anyone can browse jobs
+      allow read: if true;
+      // Only admins can post or edit jobs
+      allow write: if isAdmin();
+    }
+
+    // --- Global Logs (Admin Dashboard Only) ---
+    match /global_certificate_logs/{logId} {
+      // Only admins can see the live feed of generation tasks
+      allow read, write: if isAdmin();
+    }
+
+    // --- Global Counters & Stats ---
+    match /counters/{counterId} {
+      // Publicly viewable stats (e.g., 1 Lakh+ Teachers)
+      allow read: if true;
+      // Protected updates
+      allow write: if isAdmin();
+    }
+
+  }
+}
