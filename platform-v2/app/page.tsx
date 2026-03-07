@@ -8,10 +8,10 @@ export default function Home() {
       <nav className="fixed top-0 w-full z-50 bg-white/70 backdrop-blur-md border-b border-slate-200 shadow-sm">
         <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <div className="w-8 h-8 bg-gradient-to-tr from-purple-600 to-blue-500 rounded-lg shadow-lg flex items-center justify-center">
+            <div className="w-8 h-8 bg-linear-to-tr from-purple-600 to-blue-500 rounded-lg shadow-lg flex items-center justify-center">
               <Star className="text-white w-5 h-5" />
             </div>
-            <span id="brand-logo" className="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-slate-900 to-slate-600 tracking-tight">
+            <span id="brand-logo" className="text-xl font-bold bg-clip-text text-transparent bg-linear-to-r from-slate-900 to-slate-600 tracking-tight">
               Guru consultancy
             </span>
           </div>
@@ -46,7 +46,7 @@ export default function Home() {
             </p>
 
             <div className="flex flex-wrap gap-4">
-              <button id="cta-start" className="h-14 px-8 rounded-2xl bg-gradient-to-r from-purple-600 to-blue-600 text-white font-bold shadow-xl shadow-purple-600/30 hover:scale-[1.02] active:scale-95 transition-all flex items-center gap-3">
+              <button id="cta-start" className="h-14 px-8 rounded-2xl bg-linear-to-r from-purple-600 to-blue-600 text-white font-bold shadow-xl shadow-purple-600/30 hover:scale-[1.02] active:scale-95 transition-all flex items-center gap-3">
                 Get Started Now <ArrowRight size={20} />
               </button>
               <button id="cta-explore" className="h-14 px-8 rounded-2xl bg-white border border-slate-200 text-slate-900 font-bold hover:bg-slate-50 transition-all">
@@ -66,7 +66,7 @@ export default function Home() {
 
           <div className="relative group lg:h-[600px] flex items-center justify-center">
             {/* Background Blob */}
-            <div className="absolute -inset-4 bg-gradient-to-tr from-purple-400 to-blue-400 rounded-full blur-[80px] opacity-20 group-hover:opacity-30 transition-opacity" />
+            <div className="absolute -inset-4 bg-linear-to-tr from-purple-400 to-blue-400 rounded-full blur-[80px] opacity-20 group-hover:opacity-30 transition-opacity" />
 
             <div className="relative rounded-[40px] border-8 border-white shadow-2xl overflow-hidden animate-float">
               <Image
