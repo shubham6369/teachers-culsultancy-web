@@ -1,8 +1,0 @@
-Package              Current    Wanted   Latest  Location                         Depended by
-@eslint/js            9.39.3    9.39.3   10.0.1  node_modules/@eslint/js          platform-v2
-@types/node         20.19.35  20.19.37   25.3.5  node_modules/@types/node         platform-v2
-eslint                9.39.3    9.39.3   10.0.2  node_modules/eslint              platform-v2
-eslint-config-next    15.1.7    16.1.6   16.1.6  node_modules/eslint-config-next  platform-v2
-lucide-react         0.477.0   0.477.0  0.577.0  node_modules/lucide-react        platform-v2
-react                 19.2.3    19.2.4   19.2.4  node_modules/react               platform-v2
-react-dom             19.0.0    19.2.4   19.2.4  node_modules/react-dom           platform-v2
