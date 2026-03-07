@@ -1,0 +1,7 @@
+2daf50a fix: upgrade Tailwind gradient classes to v4 syntax
+6098e17 chore: final sync for fresh start
+33b3e49 feat: fresh start - premium simple website for Cloudflare Pages
+74b7676 chore: full reset - fresh Next.js scaffold for Cloudflare Pages
+2136471 fix: upgrade to stable @opennextjs/cloudflare and regenerate package-lock.json
+?? git_log_check.txt
+2daf50a6ebbcaba7f2a842a1165467e804842e35
