@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import { ArrowRight, Star, CheckCircle, Search, Menu, User } from 'lucide-react';
+import { ArrowRight, Star, CheckCircle, Search, Menu, User, BookOpen, Users, Award, MessageSquare, Mail, Phone, MapPin } from 'lucide-react';
 
 export default function Home() {
   return (
@@ -81,23 +81,118 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Trust Badges */}
-      <section className="bg-slate-100 py-16 border-y border-slate-200">
-        <div className="max-w-7xl mx-auto px-6 grid md:grid-cols-3 gap-8 text-center">
-          <div className="p-8 rounded-3xl bg-white shadow-sm border border-slate-200/50 hover:shadow-md transition-shadow">
-            <CheckCircle className="w-12 h-12 text-blue-500 mx-auto mb-6" />
-            <h3 className="text-xl font-bold text-slate-900 mb-2">Verified Experts</h3>
-            <p className="text-slate-500 text-sm">Consultants with decades of experience in high-tier academia.</p>
+      {/* Services Section */}
+      <section id="services" className="py-24 bg-white">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="text-center max-w-3xl mx-auto mb-16">
+            <h2 className="text-4xl font-extrabold text-slate-900 mb-4 tracking-tight">Our Professional Services</h2>
+            <p className="text-slate-600">Tailored solutions for every educational challenge. We combine deep industry knowledge with innovative strategies.</p>
           </div>
-          <div className="p-8 rounded-3xl bg-white shadow-sm border border-slate-200/50 hover:shadow-md transition-shadow">
-            <Star className="w-12 h-12 text-yellow-500 mx-auto mb-6" />
-            <h3 className="text-xl font-bold text-slate-900 mb-2">5-Star Reviews</h3>
-            <p className="text-slate-500 text-sm">Consistently rated as top choice for educational strategy.</p>
+          <div className="grid md:grid-cols-3 gap-8">
+            {[
+              { title: "Student Consultancy", desc: "Personalized academic paths, university admissions, and career counseling for ambitious students.", icon: <BookOpen className="w-6 h-6" /> },
+              { title: "Teacher Training", desc: "Modern pedagogical workshops, certification support, and classroom management strategies.", icon: <Award className="w-6 h-6" /> },
+              { title: "School Management", desc: "Operational audits, curriculum design, and digital transformation for educational institutions.", icon: <Users className="w-6 h-6" /> }
+            ].map((service, idx) => (
+              <div key={idx} className="group p-8 rounded-4xl bg-slate-50 border border-slate-100 hover:bg-white hover:border-purple-200 hover:shadow-2xl hover:shadow-purple-500/10 transition-all duration-300">
+                <div className="w-14 h-14 rounded-2xl bg-white shadow-sm flex items-center justify-center mb-6 group-hover:scale-110 group-hover:bg-purple-600 group-hover:text-white transition-all text-purple-600">
+                  {service.icon}
+                </div>
+                <h3 className="text-xl font-bold text-slate-900 mb-3">{service.title}</h3>
+                <p className="text-slate-600 text-sm leading-relaxed">{service.desc}</p>
+              </div>
+            ))}
           </div>
-          <div className="p-8 rounded-3xl bg-white shadow-sm border border-slate-200/50 hover:shadow-md transition-shadow">
-            <Search className="w-12 h-12 text-purple-500 mx-auto mb-6" />
-            <h3 className="text-xl font-bold text-slate-900 mb-2">Tailored Research</h3>
-            <p className="text-slate-500 text-sm">Deep analysis to find the perfect individual path for you.</p>
+        </div>
+      </section>
+
+      {/* About Section */}
+      <section id="about" className="py-24 bg-slate-900 overflow-hidden relative">
+        <div className="absolute top-0 right-0 w-1/2 h-full bg-linear-to-bl from-purple-500/20 to-transparent blur-3xl pointer-events-none" />
+        <div className="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-16 items-center">
+          <div className="relative">
+            <div className="absolute -top-12 -left-12 w-24 h-24 bg-purple-500 rounded-full blur-3xl opacity-50" />
+            <div className="relative z-10 space-y-6">
+              <h2 className="text-4xl font-extrabold text-white tracking-tight">Decades of Excellence in Education</h2>
+              <p className="text-slate-400 text-lg leading-relaxed">
+                Guru Consultancy was founded on the belief that education is the most powerful tool for change. Over the last 20 years, we have helped thousands of students find their true potential and hundreds of schools reach global standards.
+              </p>
+              <div className="grid grid-cols-2 gap-6 pt-4">
+                <div className="p-4 rounded-2xl bg-white/5 border border-white/10">
+                  <div className="text-3xl font-bold text-white mb-1">20+</div>
+                  <div className="text-xs text-slate-500 uppercase font-bold tracking-widest">Years Experience</div>
+                </div>
+                <div className="p-4 rounded-2xl bg-white/5 border border-white/10">
+                  <div className="text-3xl font-bold text-white mb-1">98%</div>
+                  <div className="text-xs text-slate-500 uppercase font-bold tracking-widest">Success Rate</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="relative group">
+            <div className="rounded-4xl overflow-hidden border-4 border-white/10 shadow-2xl relative">
+              <div className="absolute inset-0 bg-linear-to-t from-slate-900 via-transparent to-transparent z-10" />
+              <Image src="/hero.png" alt="About Guru" width={600} height={400} className="w-full h-[400px] object-cover grayscale brightness-75 group-hover:grayscale-0 group-hover:scale-110 transition-all duration-700" />
+              <div className="absolute bottom-6 left-6 z-20">
+                <div className="text-white font-bold text-xl mb-1">Shubham Singh</div>
+                <div className="text-purple-400 text-sm font-medium">Founder & Principal Consultant</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Contact Section */}
+      <section id="contact" className="py-24 bg-white">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="bg-slate-50 rounded-[48px] p-8 lg:p-16 border border-slate-100 shadow-sm relative overflow-hidden">
+            <div className="absolute top-0 right-0 w-64 h-64 bg-purple-100 rounded-full blur-[100px] -mr-32 -mt-32" />
+            <div className="relative z-10 grid lg:grid-cols-2 gap-16">
+              <div>
+                <h2 className="text-4xl font-extrabold text-slate-900 mb-6 tracking-tight">Ready to start? Get in touch today.</h2>
+                <p className="text-slate-600 mb-10 text-lg">Leave us a message and our team will get back to you within 24 hours.</p>
+
+                <div className="space-y-6">
+                  {[
+                    { icon: <Mail className="w-5 h-5" />, label: "Email Us", val: "shubham@guruconsultancy.com" },
+                    { icon: <Phone className="w-5 h-5" />, label: "Call Us", val: "+91 88888 88888" },
+                    { icon: <MapPin className="w-5 h-5" />, label: "Visit Us", val: "New Delhi, India" }
+                  ].map((item, id) => (
+                    <div key={id} className="flex items-center gap-4">
+                      <div className="w-10 h-10 rounded-full bg-white shadow-sm flex items-center justify-center text-purple-600">
+                        {item.icon}
+                      </div>
+                      <div>
+                        <div className="text-xs font-bold text-slate-400 uppercase tracking-widest mb-0.5">{item.label}</div>
+                        <div className="text-slate-900 font-bold">{item.val}</div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              <div className="bg-white p-8 lg:p-10 rounded-4xl shadow-xl shadow-slate-200/50 border border-slate-100">
+                <form className="space-y-6">
+                  <div className="grid md:grid-cols-2 gap-6">
+                    <div className="space-y-2">
+                      <label className="text-sm font-bold text-slate-700 ml-1">Full Name</label>
+                      <input type="text" placeholder="John Doe" className="w-full h-12 bg-slate-50 border border-slate-100 rounded-xl px-4 text-sm focus:outline-none focus:ring-2 focus:ring-purple-500/20 focus:border-purple-500 transition-all font-medium" />
+                    </div>
+                    <div className="space-y-2">
+                      <label className="text-sm font-bold text-slate-700 ml-1">Email Address</label>
+                      <input type="email" placeholder="john@example.com" className="w-full h-12 bg-slate-50 border border-slate-100 rounded-xl px-4 text-sm focus:outline-none focus:ring-2 focus:ring-purple-500/20 focus:border-purple-500 transition-all font-medium" />
+                    </div>
+                  </div>
+                  <div className="space-y-2">
+                    <label className="text-sm font-bold text-slate-700 ml-1">Message</label>
+                    <textarea rows={4} placeholder="How can we help you?" className="w-full bg-slate-50 border border-slate-100 rounded-xl p-4 text-sm focus:outline-none focus:ring-2 focus:ring-purple-500/20 focus:border-purple-500 transition-all font-medium resize-none" />
+                  </div>
+                  <button type="submit" className="w-full h-14 rounded-2xl bg-linear-to-r from-purple-600 to-blue-600 text-white font-bold shadow-lg shadow-purple-600/20 hover:scale-[1.01] active:scale-[0.99] transition-all flex items-center justify-center gap-2">
+                    Send Message <MessageSquare size={18} />
+                  </button>
+                </form>
+              </div>
+            </div>
           </div>
         </div>
       </section>
