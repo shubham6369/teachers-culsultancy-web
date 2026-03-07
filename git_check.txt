@@ -1,0 +1,234 @@
+09a4856 chore: move everything to root for easier deployment
+import Image from 'next/image';
+import { ArrowRight, Star, CheckCircle, Search, Menu, User, BookOpen, Users, Award, MessageSquare, Mail, Phone, MapPin } from 'lucide-react';
+
+export default function Home() {
+  return (
+    <main className="min-h-screen bg-slate-50 font-sans selection:bg-purple-200">
+      {/* Navbar */}
+      <nav className="fixed top-0 w-full z-50 bg-white/70 backdrop-blur-md border-b border-slate-200 shadow-sm">
+        <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
+          <div className="flex items-center gap-2">
+            <div className="w-8 h-8 bg-linear-to-tr from-purple-600 to-blue-500 rounded-lg shadow-lg flex items-center justify-center">
+              <Star className="text-white w-5 h-5" />
+            </div>
+            <span id="brand-logo" className="text-xl font-bold bg-clip-text text-transparent bg-linear-to-r from-slate-900 to-slate-600 tracking-tight">
+              Guru consultancy
+            </span>
+          </div>
+
+          <div className="hidden md:flex items-center gap-8">
+            <a href="#services" className="text-sm font-medium text-slate-600 hover:text-purple-600 transition-colors">Services</a>
+            <a href="#about" className="text-sm font-medium text-slate-600 hover:text-purple-600 transition-colors">About Us</a>
+            <a href="#contact" className="text-sm font-medium text-slate-600 hover:text-purple-600 transition-colors">Contact</a>
+            <button id="login-btn" className="px-5 py-2 rounded-full bg-slate-900 text-white text-sm font-semibold hover:bg-slate-800 transition-all active:scale-95 flex items-center gap-2">
+              <User size={16} /> Sign In
+            </button>
+          </div>
+
+          <button className="md:hidden text-slate-900"><Menu size={24} /></button>
+        </div>
+      </nav>
+
+      {/* Hero Section */}
+      <section className="relative pt-32 pb-24 overflow-hidden">
+        <div className="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-12 items-center">
+          <div className="relative z-10 space-y-8">
+            <div className="inline-flex items-center px-4 py-1.5 rounded-full bg-purple-100 border border-purple-200 text-purple-700 text-xs font-bold uppercase tracking-widest shadow-sm">
+              ✨ Welcome to Next Generation Learning
+            </div>
+
+            <h1 id="hero-title" className="text-5xl lg:text-7xl font-extrabold text-slate-900 leading-[1.1] tracking-tight">
+              Empower Your <span className="text-purple-600">Educational</span> Dreams.
+            </h1>
+
+            <p className="text-lg text-slate-600 max-w-lg leading-relaxed">
+              Unlock your potential with our expert-led consultancy services tailored for students and educators worldwide. Simple, effective, and results-driven.
+            </p>
+
+            <div className="flex flex-wrap gap-4">
+              <button id="cta-start" className="h-14 px-8 rounded-2xl bg-linear-to-r from-purple-600 to-blue-600 text-white font-bold shadow-xl shadow-purple-600/30 hover:scale-[1.02] active:scale-95 transition-all flex items-center gap-3">
+                Get Started Now <ArrowRight size={20} />
+              </button>
+              <button id="cta-explore" className="h-14 px-8 rounded-2xl bg-white border border-slate-200 text-slate-900 font-bold hover:bg-slate-50 transition-all">
+                Explore Services
+              </button>
+            </div>
+
+            <div className="flex items-center gap-4 text-sm font-medium text-slate-500">
+              <div className="flex -space-x-3">
+                {[1, 2, 3, 4].map(i => (
+                  <div key={i} className="w-10 h-10 rounded-full border-2 border-white bg-slate-200 shadow-sm" />
+                ))}
+              </div>
+              <span>Trusted by 5,000+ Students</span>
+            </div>
+          </div>
+
+          <div className="relative group lg:h-[600px] flex items-center justify-center">
+            {/* Background Blob */}
+            <div className="absolute -inset-4 bg-linear-to-tr from-purple-400 to-blue-400 rounded-full blur-[80px] opacity-20 group-hover:opacity-30 transition-opacity" />
+
+            <div className="relative rounded-[40px] border-8 border-white shadow-2xl overflow-hidden animate-float">
+              <Image
+                src="/hero.png"
+                alt="Educational Consultant Banner"
+                width={800}
+                height={600}
+                className="object-cover h-full w-full"
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Services Section */}
+      <section id="services" className="py-24 bg-white">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="text-center max-w-3xl mx-auto mb-16">
+            <h2 className="text-4xl font-extrabold text-slate-900 mb-4 tracking-tight">Our Professional Services</h2>
+            <p className="text-slate-600">Tailored solutions for every educational challenge. We combine deep industry knowledge with innovative strategies.</p>
+          </div>
+          <div className="grid md:grid-cols-3 gap-8">
+            {[
+              { title: "Student Consultancy", desc: "Personalized academic paths, university admissions, and career counseling for ambitious students.", icon: <BookOpen className="w-6 h-6" /> },
+              { title: "Teacher Training", desc: "Modern pedagogical workshops, certification support, and classroom management strategies.", icon: <Award className="w-6 h-6" /> },
+              { title: "School Management", desc: "Operational audits, curriculum design, and digital transformation for educational institutions.", icon: <Users className="w-6 h-6" /> }
+            ].map((service, idx) => (
+              <div key={idx} className="group p-8 rounded-4xl bg-slate-50 border border-slate-100 hover:bg-white hover:border-purple-200 hover:shadow-2xl hover:shadow-purple-500/10 transition-all duration-300">
+                <div className="w-14 h-14 rounded-2xl bg-white shadow-sm flex items-center justify-center mb-6 group-hover:scale-110 group-hover:bg-purple-600 group-hover:text-white transition-all text-purple-600">
+                  {service.icon}
+                </div>
+                <h3 className="text-xl font-bold text-slate-900 mb-3">{service.title}</h3>
+                <p className="text-slate-600 text-sm leading-relaxed">{service.desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* About Section */}
+      <section id="about" className="py-24 bg-slate-900 overflow-hidden relative">
+        <div className="absolute top-0 right-0 w-1/2 h-full bg-linear-to-bl from-purple-500/20 to-transparent blur-3xl pointer-events-none" />
+        <div className="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-16 items-center">
+          <div className="relative">
+            <div className="absolute -top-12 -left-12 w-24 h-24 bg-purple-500 rounded-full blur-3xl opacity-50" />
+            <div className="relative z-10 space-y-6">
+              <h2 className="text-4xl font-extrabold text-white tracking-tight">Decades of Excellence in Education</h2>
+              <p className="text-slate-400 text-lg leading-relaxed">
+                Guru Consultancy was founded on the belief that education is the most powerful tool for change. Over the last 20 years, we have helped thousands of students find their true potential and hundreds of schools reach global standards.
+              </p>
+              <div className="grid grid-cols-2 gap-6 pt-4">
+                <div className="p-4 rounded-2xl bg-white/5 border border-white/10">
+                  <div className="text-3xl font-bold text-white mb-1">20+</div>
+                  <div className="text-xs text-slate-500 uppercase font-bold tracking-widest">Years Experience</div>
+                </div>
+                <div className="p-4 rounded-2xl bg-white/5 border border-white/10">
+                  <div className="text-3xl font-bold text-white mb-1">98%</div>
+                  <div className="text-xs text-slate-500 uppercase font-bold tracking-widest">Success Rate</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="relative group">
+            <div className="rounded-4xl overflow-hidden border-4 border-white/10 shadow-2xl relative">
+              <div className="absolute inset-0 bg-linear-to-t from-slate-900 via-transparent to-transparent z-10" />
+              <Image src="/hero.png" alt="About Guru" width={600} height={400} className="w-full h-[400px] object-cover grayscale brightness-75 group-hover:grayscale-0 group-hover:scale-110 transition-all duration-700" />
+              <div className="absolute bottom-6 left-6 z-20">
+                <div className="text-white font-bold text-xl mb-1">Shubham Singh</div>
+                <div className="text-purple-400 text-sm font-medium">Founder & Principal Consultant</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Contact Section */}
+      <section id="contact" className="py-24 bg-white">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="bg-slate-50 rounded-[48px] p-8 lg:p-16 border border-slate-100 shadow-sm relative overflow-hidden">
+            <div className="absolute top-0 right-0 w-64 h-64 bg-purple-100 rounded-full blur-[100px] -mr-32 -mt-32" />
+            <div className="relative z-10 grid lg:grid-cols-2 gap-16">
+              <div>
+                <h2 className="text-4xl font-extrabold text-slate-900 mb-6 tracking-tight">Ready to start? Get in touch today.</h2>
+                <p className="text-slate-600 mb-10 text-lg">Leave us a message and our team will get back to you within 24 hours.</p>
+
+                <div className="space-y-6">
+                  {[
+                    { icon: <Mail className="w-5 h-5" />, label: "Email Us", val: "shubham@guruconsultancy.com" },
+                    { icon: <Phone className="w-5 h-5" />, label: "Call Us", val: "+91 88888 88888" },
+                    { icon: <MapPin className="w-5 h-5" />, label: "Visit Us", val: "New Delhi, India" }
+                  ].map((item, id) => (
+                    <div key={id} className="flex items-center gap-4">
+                      <div className="w-10 h-10 rounded-full bg-white shadow-sm flex items-center justify-center text-purple-600">
+                        {item.icon}
+                      </div>
+                      <div>
+                        <div className="text-xs font-bold text-slate-400 uppercase tracking-widest mb-0.5">{item.label}</div>
+                        <div className="text-slate-900 font-bold">{item.val}</div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              <div className="bg-white p-8 lg:p-10 rounded-4xl shadow-xl shadow-slate-200/50 border border-slate-100">
+                <form className="space-y-6">
+                  <div className="grid md:grid-cols-2 gap-6">
+                    <div className="space-y-2">
+                      <label className="text-sm font-bold text-slate-700 ml-1">Full Name</label>
+                      <input type="text" placeholder="John Doe" className="w-full h-12 bg-slate-50 border border-slate-100 rounded-xl px-4 text-sm focus:outline-none focus:ring-2 focus:ring-purple-500/20 focus:border-purple-500 transition-all font-medium" />
+                    </div>
+                    <div className="space-y-2">
+                      <label className="text-sm font-bold text-slate-700 ml-1">Email Address</label>
+                      <input type="email" placeholder="john@example.com" className="w-full h-12 bg-slate-50 border border-slate-100 rounded-xl px-4 text-sm focus:outline-none focus:ring-2 focus:ring-purple-500/20 focus:border-purple-500 transition-all font-medium" />
+                    </div>
+                  </div>
+                  <div className="space-y-2">
+                    <label className="text-sm font-bold text-slate-700 ml-1">Message</label>
+                    <textarea rows={4} placeholder="How can we help you?" className="w-full bg-slate-50 border border-slate-100 rounded-xl p-4 text-sm focus:outline-none focus:ring-2 focus:ring-purple-500/20 focus:border-purple-500 transition-all font-medium resize-none" />
+                  </div>
+                  <button type="submit" className="w-full h-14 rounded-2xl bg-linear-to-r from-purple-600 to-blue-600 text-white font-bold shadow-lg shadow-purple-600/20 hover:scale-[1.01] active:scale-[0.99] transition-all flex items-center justify-center gap-2">
+                    Send Message <MessageSquare size={18} />
+                  </button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer className="py-12 bg-slate-900 text-white">
+        <div className="max-w-7xl mx-auto px-6 flex flex-col items-center gap-6">
+          <div className="text-2xl font-bold tracking-tighter">GURU.</div>
+          <p className="text-slate-400 text-sm text-center max-w-sm">
+            Empowering students to build the future of education together. Dedicated to quality and fairness.
+          </p>
+          <div className="flex gap-8 text-xs font-semibold text-slate-500 uppercase tracking-widest">
+            <a href="#" className="hover:text-white transition-colors">Privacy</a>
+            <a href="#" className="hover:text-white transition-colors">Terms</a>
+            <a href="#" className="hover:text-white transition-colors">Support</a>
+          </div>
+          <div className="mt-8 pt-8 border-t border-slate-800 w-full text-center text-slate-500 text-xs">
+            © 2026 GURU Consultancy Services. All rights reserved.
+          </div>
+        </div>
+      </footer>
+
+      <style jsx global>{`
+        @keyframes float {
+          0%, 100% { transform: translateY(0); }
+          50% { transform: translateY(-20px); }
+        }
+        .animate-float {
+          animation: float 6s ease-in-out infinite;
+        }
+      `}</style>
+    </main>
+  );
+}
+ M next.config.ts
+ M package.json
+?? git_check.txt
+master

@@ -1,9 +1,9 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
+  output: 'export', // Enabled for static drag-and-drop deployment
   images: {
-    unoptimized: true, // Recommended for some Cloudflare setups if using static-like exports or remote images.
+    unoptimized: true,
   }
 };
 
