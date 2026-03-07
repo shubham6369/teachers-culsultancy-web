@@ -1,0 +1,9 @@
+
+    Directory: C:\Users\hp\40000teacher colstant website
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----          07-03-2026 09.50 AM                .vscode
+d----          07-03-2026 09.46 AM                platform-v2
+-a---          07-03-2026 10.00 AM              0 test_output.txt
+
