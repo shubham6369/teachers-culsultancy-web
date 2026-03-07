@@ -1,0 +1,20 @@
+
+> platform-v2@0.1.0 build
+> next build && npx @opennextjs/cloudflare build
+
+  Downloading swc package @next/swc-wasm-nodejs... to C:\Users\hp\AppData\Local\next-swc
+ΓÜá Attempted to load @next/swc-win32-x64-msvc, but an error occurred: \\?\C:\Users\hp\40000teacher colstant website\platform-v2\node_modules\@next\swc-win32-x64-msvc\next-swc.win32-x64-msvc.node is not a valid Win32 application.
+\\?\C:\Users\hp\40000teacher colstant website\platform-v2\node_modules\@next\swc-win32-x64-msvc\next-swc.win32-x64-msvc.node
+ΓÜá TypeError: fetch failed
+    at ignore-listed frames {
+  [cause]: Error [ConnectTimeoutError]: Connect Timeout Error (attempted addresses: 2606:4700:9643:80e2:e4a6:41f:6810:22:443, 104.16.6.34:443, 104.16.2.34:443, 104.16.0.34:443, 104.16.11.34:443, 104.16.1.34:443, 104.16.3.34:443, 104.16.7.34:443, 104.16.5.34:443, 104.16.9.34:443, 104.16.4.34:443, 104.16.8.34:443, 104.16.10.34:443, timeout: 10000ms)
+      at ignore-listed frames {
+    code: 'UND_ERR_CONNECT_TIMEOUT'
+  }
+}
+Γ¿» Failed to load SWC binary for win32/x64, see more info here: https://nextjs.org/docs/messages/failed-loading-swc
+Γ¿» Failed to load next.config.ts, see more info here https://nextjs.org/docs/messages/next-config-error
+
+> Build error occurred
+Error: Failed to load SWC binary for win32/x64, see more info here: https://nextjs.org/docs/messages/failed-loading-swc
+    at ignore-listed frames
